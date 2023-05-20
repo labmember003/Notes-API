@@ -14,3 +14,9 @@ const userSchema = mongoose.Schema({
     }
 }, {timestamps : true});
 module.exports = mongoose.model("User", userSchema);
+// model -> table
+// equivalent to dao export hua hai in android, model export hua hai
+
+// table ko schema chahiye hota hai
+
+

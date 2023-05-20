@@ -7,6 +7,8 @@ const signup = async (req, res) => {
     const {username, email, password} = req.body;
     try {
         const existingUser = await userModel.findOne({email: email});
+        // model pe hai yeh findOne function just like functions on DAO
+        // existingUser mei ya tho null ya tho data hoga
         if (existingUser) {
             return res.status(400).json({
                 message : "User already exists"
