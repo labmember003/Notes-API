@@ -2,7 +2,12 @@ const express = require("express");
 const app = express();
 const userRouter = require("./routes/userRoutes");
 const noteRouter = require("./routes/noteRoutes");
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const cors = require("cors");
+
+
+dotenv.config();
 
 app.use(express.json());
 // app. is equaivalent to Router
@@ -21,6 +26,8 @@ app.use(express.json());
 // middle ware is a funciton have req,res,next
 
 
+app.use(cors());
+
 app.use("/users", userRouter);
 // first para -> string (optional), second mei do type ke ho skte middle ware ya fir Router, check krke accodringly kreega
 // same cheez for app.get(), app.post() etc ke liye bhi hoti hai
@@ -30,18 +37,15 @@ app.use("/notes", noteRouter);
 // res is response jo milega ?
 app.get("/", (req, res) => {
     // middleware call he 3 paramenter ke saath hote hai first req, second res, third next (naam se kuch nhi hai, positional hai)
-    res.send("Hello World");
+    res.send("NOTES API From Falcon Lab");
 })
-app.post("/", (req, res) => {
-    res.send("Hello World");
-})
-app.get("/", (req, res) => {
-    res.send("Hello World");
-})
-mongoose.connect("mongodb+srv://avishisht:12345678a@cluster0.wiynpfy.mongodb.net/?retryWrites=true&w=majority")
+
+const PORT = process.env.PORT || 4000;
+
+mongoose.connect(process.env.MONGO_URL)
 .then(()=>{
-    app.listen(4000, () => {
-        console.log("server runing on port 4000")
+    app.listen(PORT, () => {
+        console.log("server runing on port" + PORT)
     });
 })
 .catch((error) => {
