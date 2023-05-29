@@ -3,7 +3,7 @@ const { signup, signin } = require("../controllers/userController");
 const userRouter = express.Router();
 
 
-// res is response jo milega ?
+// res is response jo milega ? -> Yes
 userRouter.post("/signup", signup);
 
 userRouter.post("/signin", signin)

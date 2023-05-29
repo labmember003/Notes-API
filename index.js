@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
-const userRouter = require("./routes/userRoutes");
-const noteRouter = require("./routes/noteRoutes");
+const userRouter = require("./src/routes/userRoutes");
+const noteRouter = require("./src/routes/noteRoutes");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
@@ -40,13 +40,11 @@ app.get("/", (req, res) => {
     res.send("NOTES API From Falcon Lab");
 })
 
-const PORT = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGO_URL)
+mongoose.connect("mongodb+srv://avishisht:12345678a@cluster0.wiynpfy.mongodb.net/?retryWrites=true&w=majority")
 .then(()=>{
-    app.listen(PORT, () => {
-        console.log("server runing on port" + PORT)
-    });
+    app.listen(port, () => console.log(`Server running on ${port}, http://localhost:${port}`));
 })
 .catch((error) => {
     console.log(error);
